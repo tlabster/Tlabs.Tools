@@ -1,0 +1,9 @@
+### Startup test cases:
+#
+# Start process:
+cmd.exe /?
+#
+#Minimal tests:
+?:not recognized as.*command
+>FINAL:new instance of the Windows
+FINAL:Completion is invoked

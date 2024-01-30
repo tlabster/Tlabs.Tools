@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <SelfContained>true</SelfContained>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug' ">
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>false</PublishSingleFile>
+  </PropertyGroup>
+
+  <!-- <ItemGroup>
+    <PackageReference Include="Tlabs.Core" Version="2.1.*" />
+  </ItemGroup> -->
+  <ItemGroup>
+    <ProjectReference Include="../../../Tlabs.Core/src/Tlabs.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="test.cases" CopyToOutputDirectory="PreserveNewest" Link="./%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- to publish: dotnet publish -c Release -r win-x64 -o bin/win-x64 -->
+
+</Project>
