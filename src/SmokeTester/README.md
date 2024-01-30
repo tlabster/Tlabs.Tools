@@ -75,6 +75,7 @@ cmd.exe /?
 
 :final-pattern
 ```
+
 * This starts with a comment line followed by
 	* The command to start the `cmd.exe` program (with parameter `/?`)
 	* an empty line (ignored)
@@ -95,6 +96,7 @@ cmd.exe /?
 >final:start-pattern#1
 final:final-pattern
 ```
+
 * This starts with three comment lines followed by
 	* The command to start the `cmd.exe` program (with parameter `/?`)
 	* another comment and empty line
@@ -122,6 +124,7 @@ next>next:next-pattern#1
 next>final:next-pattern#2
 final:final-pattern
 ```
+
 * Has a command to start
 * A single global failure test (matching lines containing `default-fail-pattern`)
 * Two first expectation test(s) (having no name, both with successor: `next`)
