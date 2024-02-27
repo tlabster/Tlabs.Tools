@@ -1,12 +1,10 @@
 ﻿using System.Linq;
-
+using System.IO;
 
 using Xunit;
 using Xunit.Abstractions;
-using Rieter.HMI.Test;
-using System.IO;
 
-namespace Rieter.Test.Test {
+namespace Tlabs.Tools.Smoke.Test {
 
   public class TestCasesTest {
     ITestOutputHelper tstout;

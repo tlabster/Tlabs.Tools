@@ -6,10 +6,9 @@ using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.Logging;
 
-using Tlabs;
 using Tlabs.Misc;
 
-namespace Rieter.HMI.Test {
+namespace Tlabs.Tools.Smoke {
 
   ///<summary>Test cases</summary>
   public class TestCases {

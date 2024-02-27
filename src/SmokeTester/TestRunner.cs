@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Tlabs;
 using Tlabs.Sys;
 
-namespace Rieter.HMI.Test {
+namespace Tlabs.Tools.Smoke {
 
   ///<summary>Test runner</summary>
   public partial class TestRunner {
