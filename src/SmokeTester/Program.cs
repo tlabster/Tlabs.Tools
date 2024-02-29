@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
-using Tlabs.Config;
 
 namespace Tlabs.Tools.Smoke {
 
@@ -52,13 +48,13 @@ namespace Tlabs.Tools.Smoke {
     [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL2026:RequiresUnreferencedCode", Justification = "Seems still to work")]
     static ILogger setupLog() {
       App.Setup= App.Setup with {
-        LogFactory= ApplicationSetup.CreateConsoleLoggerFactory(new() {
+        LogFactory= ApplicationSetup.CreateBasicConsoleLoggerFactory(new() {
           IncludeCategory= false,
           TimestampFormat= "HH:mm:ss.fff",   //shortend timestamp
           DfltMinimumLevel= LogLevel.Debug
         })
       };
-      var logger= ApplicationSetup.InitLog<Program>();
+      var logger= ApplicationStartup.InitLog<Program>();
       Console.Out.Flush();
       return logger;
     }
