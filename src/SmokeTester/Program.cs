@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using Tlabs;
 using Tlabs.Config;
 
-namespace Rieter.HMI.Test {
+namespace Tlabs.Tools.Smoke {
 
   ///<summary>Smoke tester program (entry point)/></summary>
   public class Program {
@@ -52,17 +49,14 @@ namespace Rieter.HMI.Test {
 
     [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL2026:RequiresUnreferencedCode", Justification = "Seems still to work")]
     static ILogger setupLog() {
-      var logger= ApplicationStartup.InitLogging<Program>(Empty.Configuration, log => {
-        log.Services.Configure<CustomStdoutFormatterOptions>(new Dictionary<string, string?> {
-          [nameof(CustomStdoutFormatterOptions.IncludeCategory)]= "false",
-          [nameof(CustomStdoutFormatterOptions.TimestampFormat)]= "HH:mm:ss.fff"   //shortend timestamp
-        }.ToConfiguration());
-
-        log.AddConsole(opt => opt.FormatterName= CustomStdoutFormatter.NAME)
-           .AddConsoleFormatter<CustomStdoutFormatter, CustomStdoutFormatterOptions>();
-        // log.SetMinimumLevel(cfg.Verbose ? LogLevel.Debug : LogLevel.Information);
-        log.SetMinimumLevel(LogLevel.Debug);
-      });
+      App.Setup= App.Setup with {
+        LogFactory= ApplicationSetup.CreateBasicConsoleLoggerFactory(new() {
+          IncludeCategory= false,
+          TimestampFormat= "HH:mm:ss.fff",   //shortend timestamp
+          DfltMinimumLevel= LogLevel.Debug
+        })
+      };
+      var logger= ApplicationSetup.InitLog<Program>();
       Console.Out.Flush();
       return logger;
     }

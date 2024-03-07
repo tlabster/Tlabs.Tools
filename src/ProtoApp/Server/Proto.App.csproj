@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyName>Proto.App</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <VersionPrefix>1.0.1</VersionPrefix>
+    <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisModeSecurity>All</AnalysisModeSecurity>
+    <AnalysisModeNaming>None</AnalysisModeNaming>
+    <!--
+    <Major Condition=" '$(Major)' == '' ">0</Major>
+    <Minor Condition=" '$(Minor)' == '' ">1</Minor>
+    <Patch Condition=" '$(Patch)' == '' ">0</Patch>
+    <VersionPrefix>$(Major).$(Minor).$(Patch)</VersionPrefix>
+    -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug' ">
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="../../../../Tlabs.Core/src/Tlabs.Core.csproj" />
+    <ProjectReference Include="../../../../Tlabs.Data/src/Tlabs.Data.csproj" />
+    <ProjectReference Include="../../../../Tlabs.EfDataStore/src/Tlabs.EfDataStore.csproj" />
+    <ProjectReference Include="../../../../Tlabs.SrvBase/src/Tlabs.SrvBase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Module/Proto.Module.csproj" />
+  </ItemGroup>
+
+  <!-- -->
+  <ItemGroup>
+    <Content Include="./rsc/**" Exclude="**/__*" CopyToOutputDirectory="PreserveNewest" Link="rsc/%(RecursiveDir)/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <Target Name="Date" BeforeTargets="CoreCompile">
+    <WriteLinesToFile File="$(IntermediateOutputPath)comp_time.cs" Lines="static partial class Build { public static long CompileTime = $([System.DateTime]::UtcNow.Ticks) %3B }" Overwrite="true" />
+    <ItemGroup>
+        <Compile Include="$(IntermediateOutputPath)comp_time.cs" />
+    </ItemGroup>
+  </Target>
+
+  <!-- to publish: dotnet publish -c Release -r win-x64 -o bin/deploy -->
+</Project>
