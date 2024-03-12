@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>My page title</title>
+    type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+  rel="stylesheet">  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript">
+  window.proto= {};
+
+
+  proto.consoleMsgPump= function (bdyId, parentId) {
+    var bdy= document.getElementById(bdyId);
+    var bdyParent= document.getElementById(parentId);
+    fetch('/api/v1/about/diag').then(resp => {
+      proto.logStream= resp.body;
+      const utf8= new TextDecoder("utf-8");
+      const reader= resp.body.getReader();
+      reader.read().then(function addChunk({ done, value }) {
+        if (done || !proto.logStream) {
+          // reader.releaseLock();
+          reader.cancel();
+          return;
+        }
+        var span= document.createElement("span")
+        span.append(utf8.decode(value, { stream: true }));
+        bdy.append(span);
+        bdyParent.scrollTop= bdyParent.scrollHeight;
+        return reader.read().then(addChunk);
+      })
+    });
+  };
+  </script>
+</head>
+
+<body onload="proto.consoleMsgPump('console', 'article')">
+  <!-- Here is our main header that is used across all the pages of our website -->
+
+  <header>
+    <h1>Tlabs Proto.App</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">API</a></li>
+      <li><a href="#">Hello</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+
+    <!-- A Search form is another common non-linear way to navigate through a website. -->
+
+    <form>
+      <input type="search" name="q" placeholder="Search query">
+      <input type="submit" value="Go!">
+    </form>
+  </nav>
+
+  <!-- Here is our page's main content -->
+  <main>
+
+    <!-- It contains an article -->
+    <article id="article">
+      <h2>Tlabs Library In Action</h2>
+
+      <p>To demonstrate the application of the Tlabs Library the <code>Proto.App</code> implements some</p>
+      <ul>
+        <li>RESTFul web APIs</li>
+        <li>access to a database store</li>
+        <li><i>Todo: document processing</i></li>
+        <li><i>Todo: Background job execution</i></li>
+        <li>and more...</li>
+      </ul>
+
+      <h3>Console Log</h3>
+      <div id="console" class="box"></div>
+
+      <p>To see the Live Console Log above in action, you would need to open this page in a second window
+        and excercise some of the APIs in order to see the application's live console log being pushed into this page as well...
+      </p>
+
+    </article>
+
+    <!-- the aside content can also be nested within the main content -->
+    <aside>
+      <h2>Related</h2>
+
+      <ul>
+        <li><a href="#">The About controller's code</a></li>
+        <li><a href="#">Oh I do like to be beside the sea</a></li>
+        <li><a href="#">Although in the North of England</a></li>
+        <li><a href="#">It never stops raining</a></li>
+        <li><a href="#">Oh well...</a></li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <!-- And here is our main footer that is used across all the pages of our website -->
+
+  <footer>
+    <p>© Copyright 2345 by Tomorrow Labs. No rights reversed.</p>
+  </footer>
+
+</body>
+
+</html>

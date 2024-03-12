@@ -18,7 +18,7 @@ namespace ProtoApp.Server.Controller {
   /// <summary>About controller</summary>
   /// <param name="conOut">Captured console output</param>
   [Route("api/v1/[controller]")]
-  public class AboutController(ConsoleOutputDistributer conOut) : Tlabs.Server.Controller.ApiCtrl {
+  public class AboutController(ConsoleOutputDistributor conOut) : Tlabs.Server.Controller.ApiCtrl {
     static readonly ILogger log= Tlabs.App.Logger<AboutController>();
 
     ///<summary> About API </summary>
@@ -42,7 +42,7 @@ namespace ProtoApp.Server.Controller {
       Response.StatusCode= (int)System.Net.HttpStatusCode.OK;
       var resStrm= Response.Body;
       conOut.AddStream(resStrm);
-      log.LogDebug("Console log stream opened...");
+      log.LogInformation("Console log stream opened...");
 
       /* Awwait the closing of the (long running) request:
        */

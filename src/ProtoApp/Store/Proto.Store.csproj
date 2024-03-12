@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proto.Module</AssemblyName>
+    <AssemblyName>Proto.Store</AssemblyName>
     <TargetFramework>net8.0</TargetFramework>
     <VersionPrefix>1.0.0-alpha</VersionPrefix>
     <OutputType>Library</OutputType>
@@ -17,9 +17,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../../../../Tlabs.Core/src/Tlabs.Core.csproj" />
     <ProjectReference Include="../../../../Tlabs.Data/src/Tlabs.Data.csproj" />
+    <ProjectReference Include="../../../../Tlabs.EfDataStore/src/Tlabs.EfDataStore.csproj" />
     <ProjectReference Include="../../../../Tlabs.SrvBase/src/Tlabs.SrvBase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- <ProjectReference Include="../Proto.Module2/Proto.Module2.csproj" /> -->
   </ItemGroup>
 
 </Project>

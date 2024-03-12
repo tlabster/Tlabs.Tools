@@ -6,7 +6,7 @@
     <OutputType>Exe</OutputType>
     <DebugType>none</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.0.1-alpha</VersionPrefix>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisModeSecurity>All</AnalysisModeSecurity>
@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../Store/Proto.Store.csproj" />
     <ProjectReference Include="../Module/Proto.Module.csproj" />
   </ItemGroup>
 

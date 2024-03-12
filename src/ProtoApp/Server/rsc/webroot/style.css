@@ -1,0 +1,154 @@
+﻿/* || General setup */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 9pt;
+  background-color: #333;
+}
+
+body {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* || typography */
+
+h1,
+h2,
+h3 {
+  font-family: 'Consolas', monospace;
+  color: #2b2b2b;
+}
+
+p,
+input,
+li {
+  font-family: 'Roboto', sans-serif;
+  color: #2b2b2b;}
+
+h1 {
+  font-size: 3.5rem;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 10px #e25615;
+}
+
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+p,
+li {
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+/* || header layout */
+
+nav,
+article,
+aside,
+footer {
+  background-color: white;
+  padding: 1%;
+}
+
+nav {
+  height: 50px;
+  font-weight: 700;
+  background-color: #5f89e4;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+nav ul {
+  padding: 0;
+  list-style-type: none;
+  flex: 2;
+  display: flex;
+}
+
+nav li {
+  display: inline;
+  text-align: center;
+  flex: 1;
+}
+
+nav a {
+  display: inline-block;
+  font-size: 2rem;
+  vertical-align: top;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+nav form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0.5em 1em;
+}
+
+input {
+  font-size: 1.3rem;
+  height: 32px;
+}
+
+input[type="search"] {
+  flex: 3;
+}
+
+input[type="submit"] {
+  flex: 1;
+  margin-left: 1rem;
+  background: #333;
+  border: 0;
+  color: white;
+}
+
+/* || main layout */
+
+main {
+  display: flex;
+}
+
+article {
+  flex: 4;
+  overflow: auto;}
+
+article div.box {
+  border: #333 solid 1px;
+  padding: 3px;
+  height: 400px;
+  font-family: 'Consolas', monospace;
+  font-size: 1.3rem;
+  white-space: pre;
+  overflow: auto;
+}
+
+aside {
+  flex: 1;
+  margin-left: 10px;
+  background-color: #6eac6c;
+}
+
+aside li {
+  padding-bottom: 10px;
+}
+
+footer {
+  margin-top: 10px;
+}
