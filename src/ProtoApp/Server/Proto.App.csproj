@@ -28,7 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="../../../../Tlabs.Core/src/Tlabs.Core.csproj" />
     <ProjectReference Include="../../../../Tlabs.Data/src/Tlabs.Data.csproj" />
-    <ProjectReference Include="../../../../Tlabs.EfDataStore/src/Tlabs.EfDataStore.csproj" />
     <ProjectReference Include="../../../../Tlabs.SrvBase/src/Tlabs.SrvBase.csproj" />
   </ItemGroup>
 

@@ -2,8 +2,9 @@
   "profiles": {
     "Proto.App": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }

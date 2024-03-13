@@ -4,8 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Mvc;
 
 
+using Tlabs.Timing;
 using Tlabs.Config;
 using Tlabs.Server.Model;
 using ProtoApp.Module.Service;
@@ -23,22 +25,32 @@ namespace ProtoApp.Module.API {
     );
 
     /// <summary>Get object(s) from (scoped) ModuleService</summary>
-    public static QueryCover<Model.ModuleObj> GetServiceObjects() {
-      // var objData= Tlabs.App.FromScopedServiceInstance<ModuleService, IEnumerable<Model.ModuleObj>>((p, modSvc) => modSvc.ObjectList());
+    public static QueryCover<Model.ModuleObj> GetServiceObjects(FilterParam<Model.ModuleObj>? param) {
       return new QueryCover<Model.ModuleObj>(
-        cover => Tlabs.App.FromScopedServiceInstance<ModuleService, IEnumerable<Model.ModuleObj>>((p, modSvc) => modSvc.ObjectList()),
+        cover => Tlabs.App.FromScopedServiceInstance<ModuleService, IEnumerable<Model.ModuleObj>>((p, modSvc) => modSvc.ObjectList(param?.AsQueryFilter())),
         e => e.Message
       );
     }
 
     /// <summary>Module REST API Configurator</summary>
     public class Configurator : IConfigurator<MiddlewareContext> {
+      static ClockedRunner? clkRunner;
       /// <inheritdoc/>
       public void AddTo(MiddlewareContext middleCtx, IConfiguration cfg) {
-        var app= (IEndpointRouteBuilder)middleCtx.AppBuilder;
+        var app= middleCtx.AsWebApplication();
 
         app.MapGet("/api/v1/module/objects/{id}", GetObject);
+        log.LogInformation("Configured endpoint: {endPoint}", "/api/v1/module/objects/{id}");
+
         app.MapGet("/api/v1/module/objects", GetServiceObjects);
+        log.LogInformation("Configured endpoint: {endPoint}", "/api/v1/module/objects");
+
+
+        clkRunner= new ClockedRunner($"{Tlabs.App.Setup.Name}-hartbeat", 7891, (ctk) => {
+          log.LogInformation("{name} alive and knocking every {ms} ms", clkRunner!.Title, clkRunner!.ClockInterval);
+          return false;
+        });
+
       }
     }
   }
