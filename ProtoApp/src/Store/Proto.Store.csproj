@@ -22,11 +22,17 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Tlabs.Core" Version="2.2.*" />
+    <PackageReference Include="Tlabs.Data" Version="2.2.*" />
+    <PackageReference Include="Tlabs.EfDataStore" Version="2.2.*" />
+    <PackageReference Include="Tlabs.SrvBase" Version="2.2.*" />
+  </ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="../../../../Tlabs.Core/src/Tlabs.Core.csproj" />
     <ProjectReference Include="../../../../Tlabs.Data/src/Tlabs.Data.csproj" />
     <ProjectReference Include="../../../../Tlabs.EfDataStore/src/Tlabs.EfDataStore.csproj" />
     <ProjectReference Include="../../../../Tlabs.SrvBase/src/Tlabs.SrvBase.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 
   <ItemGroup>
     <!-- <ProjectReference Include="../Proto.Module2/Proto.Module2.csproj" /> -->

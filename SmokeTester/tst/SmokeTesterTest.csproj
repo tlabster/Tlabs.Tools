@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/SmokeTester/SmokeTester.csproj" />
+    <ProjectReference Include="../src/SmokeTester.csproj" />
   </ItemGroup>
 
   <ItemGroup>

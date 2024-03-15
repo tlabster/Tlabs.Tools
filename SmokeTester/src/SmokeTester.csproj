@@ -20,12 +20,12 @@
     <PublishSingleFile>false</PublishSingleFile>
   </PropertyGroup>
 
-  <!-- <ItemGroup>
-    <PackageReference Include="Tlabs.Core" Version="2.2.*" />
-  </ItemGroup> -->
   <ItemGroup>
-    <ProjectReference Include="../../../Tlabs.Core/src/Tlabs.Core.csproj" />
+    <PackageReference Include="Tlabs.Core" Version="2.2.*" />
   </ItemGroup>
+  <!-- <ItemGroup>
+    <ProjectReference Include="../../../Tlabs.Core/src/Tlabs.Core.csproj" />
+  </ItemGroup> -->
 
   <ItemGroup>
     <Content Include="test.cases" CopyToOutputDirectory="PreserveNewest" Link="./%(Filename)%(Extension)" />

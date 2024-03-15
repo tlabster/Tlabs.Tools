@@ -17,9 +17,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Tlabs.Core" Version="2.2.*" />
+    <PackageReference Include="Tlabs.Data" Version="2.2.*" />
+    <PackageReference Include="Tlabs.SrvBase" Version="2.2.*" />
+  </ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="../../../../Tlabs.Core/src/Tlabs.Core.csproj" />
     <ProjectReference Include="../../../../Tlabs.Data/src/Tlabs.Data.csproj" />
     <ProjectReference Include="../../../../Tlabs.SrvBase/src/Tlabs.SrvBase.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 
 </Project>
