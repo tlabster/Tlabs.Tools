@@ -25,12 +25,10 @@ namespace ProtoApp.Module.API {
     );
 
     /// <summary>Get object(s) from (scoped) ModuleService</summary>
-    public static QueryCover<Model.ModuleObj> GetServiceObjects(FilterParam<Model.ModuleObj>? param) {
-      return new QueryCover<Model.ModuleObj>(
-        cover => Tlabs.App.FromScopedServiceInstance<ModuleService, IEnumerable<Model.ModuleObj>>((p, modSvc) => modSvc.ObjectList(param?.AsQueryFilter())),
-        e => e.Message
-      );
-    }
+    public static QueryCover<Model.ModuleObj> GetFilteredServiceObjects(FilterParam<Model.ModuleObj>? param) => new QueryCover<Model.ModuleObj>(
+      cover => Tlabs.App.FromScopedServiceInstance<ModuleService, IEnumerable<Model.ModuleObj>>((p, modSvc) => modSvc.ObjectList(param?.AsQueryFilter())),
+      e => e.Message
+    );
 
     /// <summary>Module REST API Configurator</summary>
     public class Configurator : IConfigurator<MiddlewareContext> {
@@ -42,7 +40,7 @@ namespace ProtoApp.Module.API {
         app.MapGet("/api/v1/module/objects/{id}", GetObject);
         log.LogInformation("Configured endpoint: {endPoint}", "/api/v1/module/objects/{id}");
 
-        app.MapGet("/api/v1/module/objects", GetServiceObjects);
+        app.MapGet("/api/v1/module/objects", GetFilteredServiceObjects);
         log.LogInformation("Configured endpoint: {endPoint}", "/api/v1/module/objects");
 
 

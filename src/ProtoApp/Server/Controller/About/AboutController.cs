@@ -35,7 +35,7 @@ namespace ProtoApp.Server.Controller {
     );
 
     ///<summary>Diagnostic log stream</summary>
-    [HttpGet("diag")]
+    [HttpGet("diagnostic")]
     public async Task LogStream(CancellationToken ctok) {
       using var ctokSrc= CancellationTokenSource.CreateLinkedTokenSource(ctok, Tlabs.App.AppLifetime.ApplicationStopping);
       Response.ContentType= "text/plain charset=utf-8";
