@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Tlabs.Server;
 
 namespace Rieter.HMI.Server {
+#if OLDFASHIONED_STARTUP
   ///<summary>Server startup.</summary>
   public class OldFashionedStartup {
 
@@ -14,4 +15,5 @@ namespace Rieter.HMI.Server {
                               .RunConsoleAsync();
     }
   }
+#endif
 }
