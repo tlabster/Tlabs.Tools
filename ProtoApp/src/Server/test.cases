@@ -1,0 +1,13 @@
+### Proto.App startup test cases:
+#
+# Start process:
+bin/Debug/net8.0/Proto.App.exe
+#
+#Test cases:
+
+?::\d\d[^\s]*\s\[ERR\]\s
+>ENDPOINT:\[CRT\]\sProtoApp\.Startup:\s\*\*\*\sProto\.App
+ENDPOINT>DATABASE:endpoint:\s\/api\/v1\/module\/objects
+DATABASE>HTTP:EfDataStore:\sEnsuring '
+HTTP>FINAL:Now listening on: http:\/\/\[::\]:8001
+FINAL:\[INF\]\s[^:]+:\sApplication started\.
