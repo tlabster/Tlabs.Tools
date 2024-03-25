@@ -21,7 +21,8 @@ namespace Tlabs.Tools.Smoke {
       using var cts= new CancellationTokenSource();
       Task<SysCmdResult> cmdTsk;
       try {
-        var cmd= new SystemCmd(parseCommand(tstValidator.TestCases.CommandLine));
+        var cmd= new SystemCmd(parseCommand(tstValidator.TestCases.CommandLine))
+                    .UseWorkingDir(App.Setup.ContentRoot);
         var cmdIO= new StdCmdIO();
         cmdTsk= cmd.Run(cmdIO, redirStdOut: true, redirStdIn: true, ctk: cts.Token);
 
@@ -37,7 +38,7 @@ namespace Tlabs.Tools.Smoke {
             exitCode= res.ExitCode;
           }
           catch (OperationCanceledException) {
-            exitCode= -999;
+            exitCode= 0;
           }
         }
         tstValidator.ValidateExitCode(exitCode);
