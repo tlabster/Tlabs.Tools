@@ -9,10 +9,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 
 using Tlabs.Config;
+using Tlabs.Misc;
 using Tlabs.Server.Model;
 
 using ProtoApp.Server.Model;
-using Tlabs.Misc;
 
 namespace ProtoApp.Server.Controller {
   /// <summary>About controller</summary>

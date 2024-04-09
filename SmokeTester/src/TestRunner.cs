@@ -17,7 +17,6 @@ namespace Tlabs.Tools.Smoke {
 
     ///<summary>Vaildate <paramref name="tstValidator"/></summary>
     public static async Task<int> ValidateTestCases(TestCasesValidator tstValidator) {
-      // using var cts= new CancellationTokenSource(20_000);
       using var cts= new CancellationTokenSource();
       Task<SysCmdResult> cmdTsk;
       try {
@@ -26,22 +25,13 @@ namespace Tlabs.Tools.Smoke {
         var cmdIO= new StdCmdIO();
         cmdTsk= cmd.Run(cmdIO, redirStdOut: true, redirStdIn: true, ctk: cts.Token);
 
-        int exitCode= 0;
         try {
           tstValidator.ValidateOutput(cmdIO.StdOut);
         }
         finally {
-          try {
-            await trySignalCmdTermination(cmdTsk, cmdIO);
-            cts.CancelAfter(3000);
-            using var res= await cmdTsk;
-            exitCode= res.ExitCode;
-          }
-          catch (OperationCanceledException) {
-            exitCode= 0;
-          }
+          var exitCode= await cmdTaskExit(cmdTsk, cts);
+          tstValidator.ValidateExitCode(exitCode);
         }
-        tstValidator.ValidateExitCode(exitCode);
       }
       catch (TestCasesValidator.ValidationException vx) {
         log.LogWarning("Validation test failed: {msg}", vx.Message);
@@ -52,6 +42,19 @@ namespace Tlabs.Tools.Smoke {
         return -1;
       }
       return 0;
+    }
+
+    static async ValueTask<int> cmdTaskExit(Task<SysCmdResult> cmdTsk, CancellationTokenSource cts) {
+      try {
+        /* Would be great if we could signal the sub-process under test to terminate gracefully...
+         */
+        cts.CancelAfter(3000);
+        using var res= await cmdTsk;
+        return res.ExitCode;
+      }
+      catch (OperationCanceledException) {
+        return 0;
+      }
     }
 
     [GeneratedRegex(@"((?<![\\])['""])((?:.(?!(?<! [\\])\1))*.?)\1")]
@@ -70,20 +73,5 @@ namespace Tlabs.Tools.Smoke {
       return cmdLst.ToArray();
     }
 
-    static async Task trySignalCmdTermination(Task<SysCmdResult> cmdTsk, StdCmdIO cmdIO) {
-      if (!cmdTsk.IsCompleted) {
-        await Task.Delay(300);
-        if (!cmdTsk.IsCompleted) try {
-          log.LogDebug("Trying to stop command with ctrl-C");
-          cmdIO.StdIn.WriteLine("\x04\x03q");  //try stopping process with Ctrl-C
-          cmdIO.StdIn.WriteLine("exit");
-          cmdIO.StdIn.WriteLine("stop");
-          cmdIO.StdIn.Close();
-        }
-        catch (Exception) {
-          log.LogWarning("Failed to signal command termination");
-        }
-      }
-    }
   }
 }

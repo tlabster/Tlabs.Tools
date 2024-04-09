@@ -55,7 +55,7 @@ namespace Tlabs.Tools.Smoke {
     /// <summary>Exit code validation.</summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification= "Not finished")]
     public void ValidateExitCode(int exitCode) {
-      // if (!TestCases.ExpectedExitCodes.Contains(exitCode)) throw new ValidationException($"Bad exit code: {exitCode:D}");
+      if (!TestCases.ExpectedExitCodes.Contains(exitCode)) throw new ValidationException($"Bad exit code: {exitCode:D}");
       log.LogInformation("Process exit code: {code}", exitCode);
     }
 

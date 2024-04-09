@@ -2,12 +2,15 @@
 
   <PropertyGroup>
     <AssemblyName>Proto.App</AssemblyName>
+    <Version>1.0.1-alpha</Version>
+    <IncludeSourceRevisionInInformationalVersion>true</IncludeSourceRevisionInInformationalVersion>
+    <EnableSourceLink>true</EnableSourceLink>
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <DebugType>none</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <VersionPrefix>1.0.1-alpha</VersionPrefix>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisModeSecurity>All</AnalysisModeSecurity>
     <AnalysisModeNaming>None</AnalysisModeNaming>
@@ -25,7 +28,7 @@
   </PropertyGroup>
 
 
-  <ItemGroup>
+ <ItemGroup>
     <PackageReference Include="Tlabs.Core" Version="2.2.*" />
     <PackageReference Include="Tlabs.Data" Version="2.2.*" />
     <PackageReference Include="Tlabs.SrvBase" Version="2.2.*" />

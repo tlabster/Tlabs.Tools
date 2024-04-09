@@ -10,6 +10,7 @@ using ProtoApp.Module.Service;
 namespace ProtoApp.Module.API {
 
   /// <summary>Classic REST API controller of the Module</summary>
+  [ApiExplorerSettings(IgnoreApi = false, GroupName = nameof(ClassicApiController))]
   [Route("api/v1/module/classic")]
   public class ClassicApiController(ModuleService moduleSvc) : Tlabs.Server.Controller.ApiCtrl {
     static ILogger log= Tlabs.App.Logger<ClassicApiController>();

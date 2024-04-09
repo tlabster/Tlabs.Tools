@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Builder;
 
 using Tlabs.Config;
-using Microsoft.AspNetCore.Builder;
 
 namespace ProtoApp {
   ///<summary>Server startup.</summary>

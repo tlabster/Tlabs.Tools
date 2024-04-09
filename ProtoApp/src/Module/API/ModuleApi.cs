@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 
 using Tlabs.Timing;
 using Tlabs.Config;
 using Tlabs.Server.Model;
 using ProtoApp.Module.Service;
+using ProtoApp.Module.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProtoApp.Module.API {
 
@@ -30,6 +33,19 @@ namespace ProtoApp.Module.API {
       e => e.Message
     );
 
+    /// <summary>API descriptions</summary>
+    [ApiExplorerSettings(IgnoreApi= false, GroupName= nameof(ModuleApi))]
+    public static QueryCover<ApiDesc> ApiDescriptions(IApiDescriptionGroupCollectionProvider apiExplorer) => new QueryCover<ApiDesc>(
+      cover => apiExplorer.ApiDescriptionGroups.Items.SelectMany(api => api.Items).Select(api => new ApiDesc {
+        GroupName= api.GroupName,
+        Method= api.HttpMethod,
+        RelPath= api.RelativePath,
+        DisplayName= api.ActionDescriptor.DisplayName,
+        Parameter= api.ActionDescriptor.Parameters.Select(pd => new ApiParam(pd)).Concat(api.ParameterDescriptions.Select(pd => new ApiParam(pd)))
+      }),
+      e => e.Message
+    );
+
     /// <summary>Module REST API Configurator</summary>
     public class Configurator : IConfigurator<MiddlewareContext> {
       static ClockedRunner? clkRunner;
@@ -43,6 +59,8 @@ namespace ProtoApp.Module.API {
         app.MapGet("/api/v1/module/objects", GetFilteredServiceObjects);
         log.LogInformation("Configured endpoint: {endPoint}", "/api/v1/module/objects");
 
+        app.MapGet("/api/v1/api", ApiDescriptions);
+        log.LogInformation("Configured endpoint: {endPoint}", "/api/v1/api");
 
         clkRunner= new ClockedRunner($"{Tlabs.App.Setup.Name}-hartbeat", 7891, (ctk) => {
           log.LogInformation("{name} alive and knocking every {ms} ms", clkRunner!.Title, clkRunner!.ClockInterval);
