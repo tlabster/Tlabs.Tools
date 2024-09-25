@@ -50,11 +50,8 @@
   </ItemGroup>
 
   <Target Name="Date" BeforeTargets="CoreCompile">
-    <WriteLinesToFile File="$(IntermediateOutputPath)comp_time.cs" Lines="static partial class Build { public static long CompileTime = $([System.DateTime]::UtcNow.Ticks) %3B }" Overwrite="true" />
-    <ItemGroup>
-        <Compile Include="$(IntermediateOutputPath)comp_time.cs" />
-    </ItemGroup>
+    <WriteLinesToFile File="__buildTime.generated.cs" Lines="static partial class Build { public static long CompileTime= $([System.DateTime]::UtcNow.Ticks)%3B }" Overwrite="true" />
   </Target>
 
-  <!-- to publish: dotnet publish -c Release -r win-x64 -o bin/deploy -->
+  <!-- to publish: dotnet publish -c Release -r win-x64 -->
 </Project>
