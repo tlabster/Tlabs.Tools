@@ -7,8 +7,16 @@
     <Nullable>enable</Nullable>
     <DebugType>none</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisModeSecurity>All</AnalysisModeSecurity>
+    <AnalysisModeNaming>None</AnalysisModeNaming>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot>true</PublishAot>
+    <!--
     <PublishSingleFile>true</PublishSingleFile>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    -->
     <SelfContained>true</SelfContained>
   </PropertyGroup>
 
